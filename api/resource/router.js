@@ -20,5 +20,11 @@ router.get('/:resource_id', (req, res, next) => {
     .catch(next)
 })
 
+router.post('/', (req, res, next) => {
+    Resource.postNewResource(req.body)
+    .then(newResource => {
+        res.json(newResource)
+    }).catch(next)
+})
 
 module.exports = router
