@@ -5,6 +5,7 @@ const db = require('../../data/dbConfig')
 module.exports = {
     findAllProjects,
     findProjectById,
+    postNewProject
 }
 
 async function findAllProjects(){
@@ -18,4 +19,12 @@ async function findProjectById(project_id){
     .where('p.project_id', '=', project_id)
 
     return rows
+}
+
+function postNewProject(project){
+    return db('projects as p')
+    .insert(project)
+    .then(([id]) => {
+        return findProjectById(id).then(projects => projects[0])
+    })
 }

@@ -20,6 +20,13 @@ router.get('/:project_id', (req, res, next) => {
     .catch(next)
 })
 
+router.post('/', (req, res, next) => {
+    Project.postNewProject(req.body)
+    .then(newProject => {
+        res.json(newProject)
+    })
+    .catch(next)
+})
 
 
 
