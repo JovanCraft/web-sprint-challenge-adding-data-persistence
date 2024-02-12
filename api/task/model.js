@@ -33,6 +33,9 @@ function postNewTask(task){
     return db('tasks as t')
     .insert(task)
     .then(([id]) => {
-        return findTasksById(id).then(tasks => tasks[0])
+        return findTasksById(id).then(tasks => {
+            tasks[0].task_completed = !!tasks[0].task_completed
+            return tasks[0]
+        })
     })
 }
