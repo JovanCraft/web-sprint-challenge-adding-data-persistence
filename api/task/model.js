@@ -3,7 +3,8 @@ const db = require('../../data/dbConfig')
 
 module.exports = {
     findAllTasks,
-    findTasksById
+    findTasksById,
+    postNewTask
 }
 
 async function findAllTasks(){
@@ -18,13 +19,10 @@ async function findTasksById(task_id){
     return rows
 }
 
-
-
-/*
-    select
-    tasks.*,
-    projects.project_name,
-    projects.project_description
-from tasks
-join projects
-*/
+function postNewTask(task){
+    return db('tasks as t')
+    .insert(task)
+    .then(([id]) => {
+        return findTasksById(id).then(tasks => tasks[0])
+    })
+}

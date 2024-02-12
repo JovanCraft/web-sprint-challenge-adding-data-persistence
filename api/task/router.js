@@ -20,6 +20,13 @@ router.get('/:task_id', (req, res, next) => {
     catch(next)
 })
 
+router.post('/', (req, res, next) => {
+    Task.postNewTask(req.body)
+    .then(newTask => {
+        res.json(newTask)
+    })
+    .catch(next)
+})
 
 
 module.exports = router
