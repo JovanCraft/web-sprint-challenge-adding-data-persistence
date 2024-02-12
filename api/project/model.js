@@ -29,6 +29,9 @@ function postNewProject(project){
     return db('projects as p')
     .insert(project)
     .then(([id]) => {
-        return findProjectById(id).then(projects => projects[0])
-    })
+        return findProjectById(id).then(projects => ({
+            ...projects[0],
+            project_completed: !!projects[0].project_completed
+        }));
+    });
 }
