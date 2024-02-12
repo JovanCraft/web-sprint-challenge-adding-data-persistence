@@ -11,7 +11,11 @@ module.exports = {
 async function findAllProjects(){
     const rows = await db('projects as p')
 
-    return rows
+    const projects = rows.map(project => ({
+        ...project,
+        project_completed: !!project.project_completed
+    }))
+    return projects
 }
 
 async function findProjectById(project_id){
