@@ -61,3 +61,9 @@ exports.seed = async function (knex) {
     await knex('tasks').insert(tasks)
     await knex('project_resources').insert(project_resources)
 }
+
+
+
+
+
+
